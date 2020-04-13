@@ -33,7 +33,7 @@ const update = async model => {
 
 const del = async id => {
   const userIndex = users.findIndex(item => item.id === id);
-  if (!userIndex) return;
+  if (userIndex === -1) return;
   users.splice(userIndex, 1);
   return true;
 };

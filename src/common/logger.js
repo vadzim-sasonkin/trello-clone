@@ -1,5 +1,9 @@
 const morgan = require('morgan');
 
+process.on('uncaughtException', err => {
+  console.error('<!> Exception %s: ', err.message, err.stack);
+});
+
 morgan.token('route-params', req => {
   return JSON.stringify(req.params);
 });
@@ -28,7 +32,6 @@ const logger = morgan((tokens, req, res) => {
 
 const errorLogger = (err, req, res, next) => {
   req.error = err;
-  // console.error(err);
   next(err);
 };
 
