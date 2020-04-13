@@ -1,9 +1,14 @@
 const User = require('./user.model');
+const { getRandomDelay } = require('../../common/utils');
 
 const users = [];
 
 const getAll = async () => {
-  return users;
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(users);
+    }, getRandomDelay());
+  });
 };
 
 const get = async id => {
@@ -12,8 +17,10 @@ const get = async id => {
 
 const create = async model => {
   const user = new User({ ...model });
-  users.push(user);
-  return user;
+  return new Promise(resolve => {
+    users.push(user);
+    resolve(user);
+  });
 };
 
 const update = async model => {
