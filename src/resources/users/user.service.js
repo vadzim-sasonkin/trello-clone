@@ -1,4 +1,8 @@
-const usersRepo = require('./user.memory.repository');
+const isDb = true;
+
+const usersRepo = isDb
+  ? require('./user.db.repository')
+  : require('./user.memory.repository');
 const tasksService = require('../tasks/task.service');
 
 const getAll = () => usersRepo.getAll();

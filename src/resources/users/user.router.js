@@ -25,10 +25,10 @@ router.route('/').post(
 
 router.route('/:id').get(
   wrapAsync(async (req, res, next) => {
-    const user = await usersService.get(req.params.id);
-    if (user) {
-      res.json(User.toResponse(user));
-    } else {
+    try {
+      const user = await usersService.get(req.params.id);
+      return res.json(User.toResponse(user));
+    } catch (error) {
       return next(new NotFoundError());
     }
   })
