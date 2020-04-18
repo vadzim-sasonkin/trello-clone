@@ -1,7 +1,18 @@
 const morgan = require('morgan');
 
 process.on('uncaughtException', err => {
-  console.error('<!> Exception %s: ', err.message, err.stack);
+  console.error(
+    '<!> Exception uncaught exception %s: ',
+    err.message,
+    err.stack
+  );
+
+  // eslint-disable-next-line no-process-exit
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (err, promise) => {
+  console.log('Unhandled Rejection at:', promise, 'reason:', err);
 });
 
 morgan.token('route-params', req => {
