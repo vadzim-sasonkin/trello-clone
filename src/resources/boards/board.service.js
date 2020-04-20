@@ -1,5 +1,5 @@
-const resourceRepo = require('./board.memory.repository');
-const tasksRepo = require('../tasks/task.memory.repository');
+const resourceRepo = require(`./board.${process.env.store_type}.repository`);
+const tasksRepo = require(`../tasks/task.${process.env.store_type}.repository`);
 
 const getAll = () => resourceRepo.getAll();
 const get = id => resourceRepo.get(id);

@@ -1,4 +1,4 @@
-const usersRepo = require('./user.memory.repository');
+const usersRepo = require(`./user.${process.env.store_type}.repository`);
 const tasksService = require('../tasks/task.service');
 
 const getAll = () => usersRepo.getAll();
