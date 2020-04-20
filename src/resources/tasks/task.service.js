@@ -1,4 +1,4 @@
-const resourceRepo = require('./task.memory.repository');
+const resourceRepo = require(`./task.${process.env.store_type}.repository`);
 
 const getAll = () => resourceRepo.getAll();
 const getAllByBoardId = id => resourceRepo.getAllByBoardId(id);
