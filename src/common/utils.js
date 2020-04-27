@@ -19,5 +19,8 @@ const signJwt = (userId, login) => {
     algorithm: 'HS256'
   });
 };
+const verifyJwt = token => {
+  return jwt.verify(token, config.JWT_SECRET_KEY, { algorithms: ['HS256'] });
+};
 
-module.exports = { getRandomDelay, hashPass, checkPass, signJwt };
+module.exports = { getRandomDelay, hashPass, checkPass, signJwt, verifyJwt };
