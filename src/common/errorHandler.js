@@ -1,17 +1,32 @@
 const HttpStatus = require('http-status-codes');
 
-class NotFoundError extends Error {
+class AppHttpError extends Error {
   constructor(message) {
     super();
 
     Error.captureStackTrace(this, this.constructor);
+    this.message = message;
+  }
+}
+
+class NotFoundError extends AppHttpError {
+  constructor(message) {
+    super();
     this.message = message || 'Not found';
     this.status = HttpStatus.NOT_FOUND;
   }
 }
 
+class UnauthorizedError extends AppHttpError {
+  constructor(message) {
+    super();
+    this.message = message || 'Unauthorized';
+    this.status = HttpStatus.UNAUTHORIZED;
+  }
+}
+
 function errorHandler(err, req, res, next) {
-  if (err instanceof NotFoundError) {
+  if (err instanceof AppHttpError) {
     res.status(err.status);
     res.send(err.message);
   } else {
@@ -21,4 +36,4 @@ function errorHandler(err, req, res, next) {
   next(err);
 }
 
-module.exports = { errorHandler, NotFoundError };
+module.exports = { errorHandler, NotFoundError, UnauthorizedError };

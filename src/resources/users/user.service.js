@@ -4,6 +4,7 @@ const { hashPass } = require('../../common/utils');
 
 const getAll = () => usersRepo.getAll();
 const get = id => usersRepo.get(id);
+const getByLogin = login => usersRepo.getByLogin(login);
 const create = async ({ password, ...restModel }) => {
   const hashedPass = await hashPass(password);
   return usersRepo.create({ password: hashedPass, ...restModel });
@@ -21,4 +22,4 @@ const del = async id => {
   });
 };
 
-module.exports = { getAll, get, create, update, delete: del };
+module.exports = { getAll, get, getByLogin, create, update, delete: del };

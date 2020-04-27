@@ -9,6 +9,10 @@ const get = async id => {
   return await User.findById(id);
 };
 
+const getByLogin = async login => {
+  return await User.findOne({ login });
+};
+
 const create = async model => {
   const newUser = new User(model);
   return await newUser.save();
@@ -24,4 +28,4 @@ const del = async id => {
   return await User.deleteOne({ _id: id });
 };
 
-module.exports = { getAll, get, create, update, delete: del };
+module.exports = { getAll, get, getByLogin, create, update, delete: del };
