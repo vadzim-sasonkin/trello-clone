@@ -25,6 +25,14 @@ class UnauthorizedError extends AppHttpError {
   }
 }
 
+class ForbiddenError extends AppHttpError {
+  constructor(message) {
+    super();
+    this.message = message || 'Forbidden';
+    this.status = HttpStatus.FORBIDDEN;
+  }
+}
+
 function errorHandler(err, req, res, next) {
   if (err instanceof AppHttpError) {
     res.status(err.status);
@@ -36,4 +44,9 @@ function errorHandler(err, req, res, next) {
   next(err);
 }
 
-module.exports = { errorHandler, NotFoundError, UnauthorizedError };
+module.exports = {
+  errorHandler,
+  NotFoundError,
+  UnauthorizedError,
+  ForbiddenError
+};

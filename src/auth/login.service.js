@@ -4,7 +4,7 @@ const { checkPass, signJwt } = require('../common/utils');
 const login = async ({ login: loginText, password }) => {
   const user = await userService.getByLogin(loginText);
   if (!user) {
-    return false;
+    return undefined;
   }
   const isPassCorrect = await checkPass(password, user.password);
   if (!isPassCorrect) {
