@@ -15,6 +15,10 @@ const get = async id => {
   return users.find(user => user.id === id);
 };
 
+const getByLogin = login => {
+  return users.find(user => user.login === login);
+};
+
 const create = async model => {
   const user = new User({ ...model });
   return new Promise(resolve => {
@@ -38,4 +42,4 @@ const del = async id => {
   return true;
 };
 
-module.exports = { getAll, get, create, update, delete: del };
+module.exports = { getAll, get, getByLogin, create, update, delete: del };
